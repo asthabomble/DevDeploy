@@ -7,7 +7,7 @@ app.use(express.json());
 
 // Import Routes
 const authRoutes = require("./routes/auth.routes");
-
+const taskRoutes = require("./routes/task.routes");
 // Home Route
 app.get("/", (req, res) => {
     res.json({
@@ -19,5 +19,6 @@ app.get("/", (req, res) => {
 // Auth Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/tasks", taskRoutes);
 
 module.exports = app;
