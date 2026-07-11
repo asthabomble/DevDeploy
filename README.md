@@ -7,27 +7,26 @@
 
 ## 📖 Description
 
-DevDeploy is a full-stack team collaboration and project management application inspired by tools like Trello and Jira. It enables teams to securely manage projects, organize tasks, and collaborate efficiently using modern web technologies.
+DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, and collaborate efficiently. The backend is built using Node.js, Express.js, MongoDB, and JWT authentication, with a React frontend planned for future development.
 
 ---
 
 ## ✨ Features
 
 ### ✅ Implemented
-- User Registration
-- User Login
+
+- Secure User Authentication (Register & Login)
 - Password Hashing using bcrypt
-- JWT Authentication
+- JWT-based Authentication & Protected Routes
+- Project Management Module
+- Task Management Module
 - MongoDB Atlas Integration
-- RESTful Authentication APIs
+- RESTful API Architecture
 - Express.js Backend
 
 ### 🚧 Upcoming
-- JWT Authentication Middleware
-- Project Management
-- Task Management
-- Team Collaboration
-- Task Status Updates
+
+- Team Collaboration Module
 - User Dashboard
 - React Frontend
 - Docker Support
@@ -39,6 +38,7 @@ DevDeploy is a full-stack team collaboration and project management application 
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB Atlas
@@ -48,6 +48,7 @@ DevDeploy is a full-stack team collaboration and project management application 
 - dotenv
 
 ### Tools
+
 - Git & GitHub
 - Postman
 - VS Code
@@ -56,25 +57,43 @@ DevDeploy is a full-stack team collaboration and project management application 
 
 ## 📁 Project Structure
 
-```
+```text
 DevDeploy/
 │
 ├── backend/
 │   ├── src/
 │   │   ├── config/
+│   │   │   └── db.js
+│   │   │
 │   │   ├── controllers/
+│   │   │   ├── auth.controller.js
+│   │   │   ├── project.controller.js
+│   │   │   └── task.controller.js
+│   │   │
 │   │   ├── middleware/
+│   │   │   └── auth.middleware.js
+│   │   │
 │   │   ├── models/
+│   │   │   ├── User.js
+│   │   │   ├── Project.js
+│   │   │   └── Task.js
+│   │   │
 │   │   ├── routes/
+│   │   │   ├── auth.routes.js
+│   │   │   ├── project.routes.js
+│   │   │   └── task.routes.js
+│   │   │
 │   │   ├── app.js
 │   │   └── server.js
+│   │
 │   ├── .env
 │   └── package.json
 │
 ├── frontend/          # Coming Soon
 ├── docs/
 ├── scripts/
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
@@ -83,6 +102,7 @@ DevDeploy/
 
 - Passwords are securely hashed using **bcrypt** before being stored.
 - Authentication is handled using **JSON Web Tokens (JWT)**.
+- Protected routes are secured using custom **JWT Authentication Middleware**.
 - Sensitive credentials are managed using **environment variables**.
 
 ---
@@ -103,7 +123,7 @@ cd backend
 npm install
 ```
 
-Create a `.env` file:
+### Create a `.env` file
 
 ```env
 PORT=5000
@@ -111,10 +131,16 @@ MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
 
-Start the development server:
+### Start the development server
 
 ```bash
 npm run dev
+```
+
+The backend will run on:
+
+```
+http://localhost:5000
 ```
 
 ---
@@ -123,23 +149,25 @@ npm run dev
 
 - [x] Backend Setup
 - [x] MongoDB Connection
-- [x] User Model
-- [x] Register API
-- [x] Login API
-- [x] Password Hashing
-- [x] JWT Authentication
-- [ ] Authentication Middleware
-- [ ] Project APIs
-- [ ] Task APIs
+- [x] Authentication Module
+- [x] Project Management Module
+- [x] Task Management Module
+- [ ] Team Collaboration Module
+- [ ] User Dashboard
 - [ ] React Frontend
 - [ ] Dockerization
+- [ ] CI/CD Pipeline
 - [ ] Deployment
 
 ---
+
 ## 👩‍💻 Author
 
 **Astha Bomble**
 
+- GitHub: https://github.com/asthabomble
+
+---
 
 ## 🤝 Contributing
 
