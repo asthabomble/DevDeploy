@@ -1,7 +1,7 @@
 const express = require("express");
 
 const app = express();
-
+const projectRoutes = require("./routes/project.routes");
 // Middleware to read JSON from request body
 app.use(express.json());
 
@@ -18,5 +18,6 @@ app.get("/", (req, res) => {
 
 // Auth Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
 
 module.exports = app;
