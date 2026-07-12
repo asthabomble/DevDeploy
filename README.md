@@ -7,7 +7,7 @@
 
 ## 📖 Description
 
-DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, and collaborate efficiently. The backend is built using Node.js, Express.js, MongoDB, and JWT authentication, with a React frontend planned for future development.
+DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, assign work, and collaborate efficiently. The backend is built using Node.js, Express.js, MongoDB, and JWT authentication, with a React frontend planned for future development.
 
 ---
 
@@ -17,17 +17,18 @@ DevDeploy is a production-style full-stack project management and team collabora
 
 - Secure User Authentication (Register & Login)
 - Password Hashing using bcrypt
-- JWT-based Authentication & Protected Routes
-- Project Management Module
-- Task Management Module
+- JWT Authentication & Protected Routes
+- Project Management
+- Task Management
+- Team Collaboration
+- Role-based Authorization (Project Owner Permissions)
+- Task Assignment Validation
 - MongoDB Atlas Integration
 - RESTful API Architecture
-- Express.js Backend
 
 ### 🚧 Upcoming
 
-- Team Collaboration Module
-- User Dashboard
+- User Dashboard & Analytics
 - React Frontend
 - Docker Support
 - CI/CD Pipeline
@@ -49,7 +50,8 @@ DevDeploy is a production-style full-stack project management and team collabora
 
 ### Tools
 
-- Git & GitHub
+- Git
+- GitHub
 - Postman
 - VS Code
 
@@ -98,11 +100,14 @@ DevDeploy/
 
 ---
 
-## 🔐 Authentication
+## 🔐 Authentication & Authorization
 
 - Passwords are securely hashed using **bcrypt** before being stored.
 - Authentication is handled using **JSON Web Tokens (JWT)**.
 - Protected routes are secured using custom **JWT Authentication Middleware**.
+- Only authenticated users can access protected APIs.
+- Project owners can manage team members and project permissions.
+- Tasks can only be assigned to users who are members of the project.
 - Sensitive credentials are managed using **environment variables**.
 
 ---
@@ -152,8 +157,9 @@ http://localhost:5000
 - [x] Authentication Module
 - [x] Project Management Module
 - [x] Task Management Module
-- [ ] Team Collaboration Module
-- [ ] User Dashboard
+- [x] Team Collaboration Module
+- [x] Authorization & Access Control
+- [ ] User Dashboard & Analytics
 - [ ] React Frontend
 - [ ] Dockerization
 - [ ] CI/CD Pipeline
