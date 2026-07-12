@@ -5,40 +5,47 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=jsonwebtokens)
 
-## 📖 Description
+# 📖 Description
 
-DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, assign work, collaborate efficiently, and monitor project progress through a dashboard. The backend is built using Node.js, Express.js, MongoDB, and JWT authentication, with a React frontend planned for future development.
+DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, assign work, collaborate with team members, and monitor project progress through dashboard analytics.
+
+The backend is built using **Node.js, Express.js, MongoDB Atlas, and JWT Authentication**, while the frontend will be developed using **React.js**.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-### ✅ Implemented
+## ✅ Implemented
 
 - Secure User Authentication (Register & Login)
-- Password Hashing using bcrypt
 - JWT Authentication & Protected Routes
+- User Profile Management
 - Project Management
 - Task Management
 - Team Collaboration
 - Dashboard & Analytics API
-- Role-based Authorization (Project Owner Permissions)
+- Project Statistics
+- Role-based Authorization
 - Task Assignment Validation
+- Password Hashing (bcrypt)
 - MongoDB Atlas Integration
 - RESTful API Architecture
 
-### 🚧 Upcoming
+---
+
+## 🚧 Upcoming
 
 - React Frontend
+- Responsive UI
 - Docker Support
 - CI/CD Pipeline
-- Deployment
+- Cloud Deployment
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
@@ -48,7 +55,7 @@ DevDeploy is a production-style full-stack project management and team collabora
 - JSON Web Token (JWT)
 - dotenv
 
-### Tools
+## Tools
 
 - Git
 - GitHub
@@ -57,80 +64,88 @@ DevDeploy is a production-style full-stack project management and team collabora
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```text
 DevDeploy/
 │
 ├── backend/
 │   ├── src/
-│   │   ├── config/
-│   │   │   └── db.js
-│   │   │
-│   │   ├── controllers/
-│   │   │   ├── auth.controller.js
-│   │   │   ├── dashboard.controller.js
-│   │   │   ├── project.controller.js
-│   │   │   └── task.controller.js
-│   │   │
-│   │   ├── middleware/
-│   │   │   └── auth.middleware.js
-│   │   │
-│   │   ├── models/
-│   │   │   ├── User.js
-│   │   │   ├── Project.js
-│   │   │   └── Task.js
-│   │   │
-│   │   ├── routes/
-│   │   │   ├── auth.routes.js
-│   │   │   ├── dashboard.routes.js
-│   │   │   ├── project.routes.js
-│   │   │   └── task.routes.js
-│   │   │
-│   │   ├── app.js
-│   │   └── server.js
+│   │
+│   │── config/
+│   │     └── db.js
+│   │
+│   │── controllers/
+│   │     ├── auth.controller.js
+│   │     ├── dashboard.controller.js
+│   │     ├── project.controller.js
+│   │     ├── task.controller.js
+│   │     └── user.controller.js
+│   │
+│   │── middleware/
+│   │     └── auth.middleware.js
+│   │
+│   │── models/
+│   │     ├── User.js
+│   │     ├── Project.js
+│   │     └── Task.js
+│   │
+│   │── routes/
+│   │     ├── auth.routes.js
+│   │     ├── dashboard.routes.js
+│   │     ├── project.routes.js
+│   │     ├── task.routes.js
+│   │     └── user.routes.js
+│   │
+│   │── app.js
+│   │── server.js
 │   │
 │   ├── .env
-│   └── package.json
+│   ├── package.json
+│   └── package-lock.json
 │
-├── frontend/          # Coming Soon
+├── frontend/               # React (Coming Soon)
+│
 ├── docs/
+│
 ├── scripts/
+│
 ├── README.md
+│
 └── LICENSE
 ```
 
 ---
 
-## 🔐 Authentication & Authorization
+# 🔐 Authentication & Authorization
 
 - Passwords are securely hashed using **bcrypt** before being stored.
-- Authentication is handled using **JSON Web Tokens (JWT)**.
+- Authentication is implemented using **JSON Web Tokens (JWT)**.
 - Protected routes are secured using custom **JWT Authentication Middleware**.
 - Only authenticated users can access protected APIs.
-- Project owners can manage team members and project permissions.
-- Tasks can only be assigned to users who are members of the project.
+- Project owners can manage team members.
+- Tasks can only be assigned to project members.
 - Sensitive credentials are managed using **environment variables**.
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-### Clone the repository
+## Clone the repository
 
 ```bash
 git clone git@github.com:asthabomble/DevDeploy.git
 cd DevDeploy
 ```
 
-### Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
 npm install
 ```
 
-### Create a `.env` file
+## Create a `.env` file
 
 ```env
 PORT=5000
@@ -138,7 +153,7 @@ MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
 
-### Start the development server
+## Start the development server
 
 ```bash
 npm run dev
@@ -152,11 +167,12 @@ http://localhost:5000
 
 ---
 
-## 📌 Current Progress
+# 📌 Current Progress
 
 - [x] Backend Setup
 - [x] MongoDB Connection
 - [x] Authentication Module
+- [x] User Profile Module
 - [x] Project Management Module
 - [x] Task Management Module
 - [x] Team Collaboration Module
@@ -169,26 +185,26 @@ http://localhost:5000
 
 ---
 
-## 👩‍💻 Author
+# 👩‍💻 Author
 
 **Astha Bomble**
 
-- GitHub: https://github.com/asthabomble
+GitHub: https://github.com/asthabomble
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 Contributions, suggestions, and feedback are welcome. Feel free to fork the repository, open an issue, or submit a pull request.
 
 ---
 
-## ⭐ Support
+# ⭐ Support
 
-If you found this project useful, please consider giving it a ⭐ on GitHub. Your support and feedback are greatly appreciated!
+If you found this project useful, please consider giving it a ⭐ on GitHub.
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is licensed under the MIT License.
