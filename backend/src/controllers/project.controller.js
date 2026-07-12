@@ -1,4 +1,5 @@
 const Project = require("../models/Project");
+const User = require("../models/User");
 
 const createProject = async (req, res) => {
     try {
@@ -54,8 +55,6 @@ const getProjects = async (req, res) => {
     }
 };
 
-const User = require("../models/User");
-
 const addMember = async (req, res) => {
     try {
         const { projectId } = req.params;
@@ -71,6 +70,14 @@ const addMember = async (req, res) => {
             });
         }
 
+        // Only owner can add members
+        if (project.owner.toString() !== req.user.userId) {
+            return res.status(403).json({
+                success: false,
+                message: "Only the project owner can add members."
+            });
+        }
+
         // Find user
         const user = await User.findOne({ email });
 
@@ -82,7 +89,11 @@ const addMember = async (req, res) => {
         }
 
         // Check if already a member
-        if (project.members.includes(user._id)) {
+        const isMember = project.members.some(
+            member => member.toString() === user._id.toString()
+        );
+
+        if (isMember) {
             return res.status(400).json({
                 success: false,
                 message: "User is already a member."
@@ -107,6 +118,7 @@ const addMember = async (req, res) => {
         });
     }
 };
+
 const getProjectMembers = async (req, res) => {
     try {
         const { projectId } = req.params;
@@ -123,6 +135,7 @@ const getProjectMembers = async (req, res) => {
 
         res.status(200).json({
             success: true,
+            count: project.members.length,
             members: project.members
         });
 
@@ -133,8 +146,60 @@ const getProjectMembers = async (req, res) => {
         });
     }
 };
+
+const removeMember = async (req, res) => {
+    try {
+        const { projectId, userId } = req.params;
+
+        const project = await Project.findById(projectId);
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found."
+            });
+        }
+
+        // Only owner can remove members
+        if (project.owner.toString() !== req.user.userId) {
+            return res.status(403).json({
+                success: false,
+                message: "Only the project owner can remove members."
+            });
+        }
+
+        // Prevent owner from being removed
+        if (project.owner.toString() === userId) {
+            return res.status(400).json({
+                success: false,
+                message: "Project owner cannot be removed."
+            });
+        }
+
+        project.members = project.members.filter(
+            member => member.toString() !== userId
+        );
+
+        await project.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Member removed successfully.",
+            project
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     createProject,
     getProjects,
-    addMember,getProjectMembers
+    addMember,
+    getProjectMembers,
+    removeMember
 };

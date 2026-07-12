@@ -5,7 +5,7 @@ const createTask = async (req, res) => {
     try {
         const { title, description, projectId, assignedTo } = req.body;
 
-        // Validate
+        // Validate required fields
         if (!title || !projectId) {
             return res.status(400).json({
                 success: false,
@@ -21,6 +21,20 @@ const createTask = async (req, res) => {
                 success: false,
                 message: "Project not found.",
             });
+        }
+
+        // Check if assigned user is a member of the project
+        if (assignedTo) {
+            const isMember = project.members.some(
+                member => member.toString() === assignedTo
+            );
+
+            if (!isMember) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Assigned user is not a project member."
+                });
+            }
         }
 
         // Create task
@@ -50,7 +64,6 @@ const getTasks = async (req, res) => {
     try {
         const { projectId } = req.params;
 
-        // Check project exists
         const project = await Project.findById(projectId);
 
         if (!project) {
@@ -78,6 +91,7 @@ const getTasks = async (req, res) => {
         });
     }
 };
+
 const updateTask = async (req, res) => {
     try {
         const { taskId } = req.params;
@@ -119,6 +133,7 @@ const updateTask = async (req, res) => {
         });
     }
 };
+
 const updateTaskStatus = async (req, res) => {
     try {
         const { taskId } = req.params;
@@ -159,6 +174,7 @@ const updateTaskStatus = async (req, res) => {
         });
     }
 };
+
 const deleteTask = async (req, res) => {
     try {
         const { taskId } = req.params;
@@ -186,6 +202,7 @@ const deleteTask = async (req, res) => {
         });
     }
 };
+
 module.exports = {
     createTask,
     getTasks,
