@@ -5,10 +5,12 @@ const authMiddleware = require("../middleware/auth.middleware");
 const { createProject } = require("../controllers/project.controller");
 const {
     
-    getProjects
+    getProjects,addMember,getProjectMembers
 } = require("../controllers/project.controller");
 
 // Protected route
 router.post("/", authMiddleware, createProject);
 router.get("/", authMiddleware, getProjects);
+router.post("/:projectId/members", authMiddleware, addMember);
+router.get("/:projectId/members", authMiddleware, getProjectMembers);
 module.exports = router;
