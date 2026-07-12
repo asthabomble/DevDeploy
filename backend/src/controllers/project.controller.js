@@ -239,6 +239,113 @@ const deleteProject = async (req, res) => {
         });
     }
 };
+const updateProject = async (req, res) => {
+    try {
+        const { projectId } = req.params;
+        const { title, description } = req.body;
+
+        // Find project
+        const project = await Project.findById(projectId);
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found."
+            });
+        }
+
+        // Only owner can update
+        if (project.owner.toString() !== req.user.userId) {
+            return res.status(403).json({
+                success: false,
+                message: "Only the project owner can update this project."
+            });
+        }
+
+        // Validate title
+        if (title !== undefined && title.trim() === "") {
+            return res.status(400).json({
+                success: false,
+                message: "Project title cannot be empty."
+            });
+        }
+
+        // Update fields
+        if (title !== undefined) {
+            project.title = title;
+        }
+
+        if (description !== undefined) {
+            project.description = description;
+        }
+
+        await project.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Project updated successfully.",
+            project
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+const getProjectById = async (req, res) => {
+    try {
+        const { projectId } = req.params;
+
+        const project = await Project.findById(projectId)
+            .populate("owner", "name email")
+            .populate("members", "name email");
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found."
+            });
+        }
+
+        const totalTasks = await Task.countDocuments({
+            project: projectId
+        });
+
+        const todo = await Task.countDocuments({
+            project: projectId,
+            status: "Todo"
+        });
+
+        const inProgress = await Task.countDocuments({
+            project: projectId,
+            status: "In Progress"
+        });
+
+        const done = await Task.countDocuments({
+            project: projectId,
+            status: "Done"
+        });
+
+        res.status(200).json({
+            success: true,
+            project,
+            stats: {
+                totalTasks,
+                todo,
+                inProgress,
+                done
+            }
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
 
 module.exports = {
     createProject,
@@ -246,5 +353,7 @@ module.exports = {
     addMember,
     getProjectMembers,
     removeMember,
-    deleteProject
+    deleteProject,
+    updateProject,
+    getProjectById
 };
