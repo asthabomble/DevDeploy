@@ -7,7 +7,7 @@
 
 ## 📖 Description
 
-DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, assign work, and collaborate efficiently. The backend is built using Node.js, Express.js, MongoDB, and JWT authentication, with a React frontend planned for future development.
+DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like Trello and Jira. It enables users to securely authenticate, manage projects, organize tasks, assign work, collaborate efficiently, and monitor project progress through a dashboard. The backend is built using Node.js, Express.js, MongoDB, and JWT authentication, with a React frontend planned for future development.
 
 ---
 
@@ -21,6 +21,7 @@ DevDeploy is a production-style full-stack project management and team collabora
 - Project Management
 - Task Management
 - Team Collaboration
+- Dashboard & Analytics API
 - Role-based Authorization (Project Owner Permissions)
 - Task Assignment Validation
 - MongoDB Atlas Integration
@@ -28,7 +29,6 @@ DevDeploy is a production-style full-stack project management and team collabora
 
 ### 🚧 Upcoming
 
-- User Dashboard & Analytics
 - React Frontend
 - Docker Support
 - CI/CD Pipeline
@@ -69,6 +69,7 @@ DevDeploy/
 │   │   │
 │   │   ├── controllers/
 │   │   │   ├── auth.controller.js
+│   │   │   ├── dashboard.controller.js
 │   │   │   ├── project.controller.js
 │   │   │   └── task.controller.js
 │   │   │
@@ -82,6 +83,7 @@ DevDeploy/
 │   │   │
 │   │   ├── routes/
 │   │   │   ├── auth.routes.js
+│   │   │   ├── dashboard.routes.js
 │   │   │   ├── project.routes.js
 │   │   │   └── task.routes.js
 │   │   │
@@ -159,7 +161,7 @@ http://localhost:5000
 - [x] Task Management Module
 - [x] Team Collaboration Module
 - [x] Authorization & Access Control
-- [ ] User Dashboard & Analytics
+- [x] Dashboard & Analytics API
 - [ ] React Frontend
 - [ ] Dockerization
 - [ ] CI/CD Pipeline

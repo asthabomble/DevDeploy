@@ -46,12 +46,16 @@ const createTask = async (req, res) => {
             createdBy: req.user.userId,
         });
 
-        res.status(201).json({
-            success: true,
-            message: "Task created successfully.",
-            task,
-        });
 
+       const populatedTask = await Task.findById(task._id)
+    .populate("assignedTo", "name email")
+    .populate("createdBy", "name email");
+
+res.status(201).json({
+    success: true,
+    message: "Task created successfully.",
+    task: populatedTask
+});
     } catch (error) {
         res.status(500).json({
             success: false,

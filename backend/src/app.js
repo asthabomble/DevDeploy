@@ -1,13 +1,15 @@
 const express = require("express");
 
 const app = express();
-const projectRoutes = require("./routes/project.routes");
+
 // Middleware to read JSON from request body
 app.use(express.json());
 
 // Import Routes
 const authRoutes = require("./routes/auth.routes");
 const taskRoutes = require("./routes/task.routes");
+const projectRoutes = require("./routes/project.routes");
+const dashboardRoutes = require("./routes/dashboard.routes");
 // Home Route
 app.get("/", (req, res) => {
     res.json({
@@ -20,5 +22,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 module.exports = app;
