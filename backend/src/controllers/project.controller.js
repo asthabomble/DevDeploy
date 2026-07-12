@@ -1,5 +1,6 @@
 const Project = require("../models/Project");
 const User = require("../models/User");
+const Task = require("../models/Task");
 
 const createProject = async (req, res) => {
     try {
@@ -196,10 +197,54 @@ const removeMember = async (req, res) => {
     }
 };
 
+const deleteProject = async (req, res) => {
+    try {
+        const { projectId } = req.params;
+
+        // Find project
+        const project = await Project.findById(projectId);
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found."
+            });
+        }
+
+        // Only owner can delete
+        if (project.owner.toString() !== req.user.userId) {
+            return res.status(403).json({
+                success: false,
+                message: "Only the project owner can delete this project."
+            });
+        }
+
+        // Delete all tasks of this project
+        await Task.deleteMany({
+            project: projectId
+        });
+
+        // Delete project
+        await Project.findByIdAndDelete(projectId);
+
+        res.status(200).json({
+            success: true,
+            message: "Project deleted successfully."
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     createProject,
     getProjects,
     addMember,
     getProjectMembers,
-    removeMember
+    removeMember,
+    deleteProject
 };
