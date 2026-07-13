@@ -64,57 +64,26 @@ The backend is built using **Node.js, Express.js, MongoDB Atlas, and JWT Authent
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```text
 DevDeploy/
-│
 ├── backend/
 │   ├── src/
-│   │
-│   │── config/
-│   │     └── db.js
-│   │
-│   │── controllers/
-│   │     ├── auth.controller.js
-│   │     ├── dashboard.controller.js
-│   │     ├── project.controller.js
-│   │     ├── task.controller.js
-│   │     └── user.controller.js
-│   │
-│   │── middleware/
-│   │     └── auth.middleware.js
-│   │
-│   │── models/
-│   │     ├── User.js
-│   │     ├── Project.js
-│   │     └── Task.js
-│   │
-│   │── routes/
-│   │     ├── auth.routes.js
-│   │     ├── dashboard.routes.js
-│   │     ├── project.routes.js
-│   │     ├── task.routes.js
-│   │     └── user.routes.js
-│   │
-│   │── app.js
-│   │── server.js
-│   │
-│   ├── .env
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── app.js
+│   │   └── server.js
 │   ├── package.json
-│   └── package-lock.json
+│   └── .env
 │
-├── frontend/               # React (Coming Soon)
-│
-├── docs/
-│
-├── scripts/
-│
+├── frontend/          # React (Coming Soon)
 ├── README.md
-│
 └── LICENSE
 ```
-
 ---
 
 # 🔐 Authentication & Authorization
