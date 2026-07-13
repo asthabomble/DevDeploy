@@ -1,8 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
-// Middleware to read JSON from request body
+// Middleware
+app.use(cors());
 app.use(express.json());
 
 // Import Routes
@@ -11,15 +13,16 @@ const taskRoutes = require("./routes/task.routes");
 const projectRoutes = require("./routes/project.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const userRoutes = require("./routes/user.routes");
+
 // Home Route
 app.get("/", (req, res) => {
     res.json({
         success: true,
-        message: "Welcome to TeamTask API 🚀"
+        message: "Welcome to TeamTask API 🚀",
     });
 });
 
-// Auth Routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
