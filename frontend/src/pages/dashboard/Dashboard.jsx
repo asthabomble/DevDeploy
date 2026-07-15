@@ -1,10 +1,43 @@
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import StatCard from "../../components/dashboard/StatCard";
 import { useAuth } from "../../context/AuthContext";
+import { getDashboardStats } from "../../services/dashboardService";
 
 function Dashboard() {
-
     const { user } = useAuth();
+
+    const [stats, setStats] = useState({
+        totalProjects: 0,
+        totalTasks: 0,
+        todo: 0,
+        done: 0,
+    });
+
+    
+    useEffect(() => {
+    const fetchDashboard = async () => {
+        try {
+            const response = await getDashboardStats();
+
+            setStats({
+                totalProjects: response.dashboard.totalProjects,
+                totalTasks: response.dashboard.totalTasks,
+                todo: response.dashboard.todo,
+                inProgress: response.dashboard.inProgress,
+                done: response.dashboard.done,
+            });
+
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to load dashboard");
+        }
+    };
+
+    fetchDashboard();
+}, []);
 
     return (
         <DashboardLayout>
@@ -21,25 +54,30 @@ function Dashboard() {
 
                 <StatCard
                     title="Projects"
-                    value="0"
+                    value={stats.totalProjects}
                     color="text-blue-600"
                 />
 
                 <StatCard
                     title="Tasks"
-                    value="0"
+                    value={stats.totalTasks}
                     color="text-green-600"
                 />
 
                 <StatCard
                     title="To Do"
-                    value="0"
+                    value={stats.todo}
                     color="text-yellow-500"
+                />
+                <StatCard
+                    title="In Progress"
+                    value={stats.inProgress}
+                    color="text-orange-500"
                 />
 
                 <StatCard
                     title="Done"
-                    value="0"
+                    value={stats.done}
                     color="text-purple-600"
                 />
 
