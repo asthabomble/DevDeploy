@@ -1,9 +1,15 @@
 import { useState } from "react";
 
-function ProjectForm({ onSubmit, onCancel }) {
+function ProjectForm({
+    onSubmit,
+    onCancel,
+    initialData = null,
+    isEdit = false,
+}) {
+
     const [formData, setFormData] = useState({
-        title: "",
-        description: "",
+        title: initialData?.title || "",
+        description: initialData?.description || "",
     });
 
     const handleChange = (e) => {
@@ -24,7 +30,7 @@ function ProjectForm({ onSubmit, onCancel }) {
             <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-8">
 
                 <h2 className="text-2xl font-bold mb-6">
-                    Create Project
+                    {isEdit ? "Edit Project" : "Create Project"}
                 </h2>
 
                 <form
@@ -44,7 +50,7 @@ function ProjectForm({ onSubmit, onCancel }) {
                             value={formData.title}
                             onChange={handleChange}
                             placeholder="Enter project title"
-                            className="w-full border rounded-xl p-3 mt-2"
+                            className="w-full border rounded-xl p-3 mt-2 outline-none focus:ring-2 focus:ring-blue-300"
                             required
                         />
 
@@ -62,7 +68,7 @@ function ProjectForm({ onSubmit, onCancel }) {
                             value={formData.description}
                             onChange={handleChange}
                             placeholder="Enter description"
-                            className="w-full border rounded-xl p-3 mt-2"
+                            className="w-full border rounded-xl p-3 mt-2 outline-none focus:ring-2 focus:ring-blue-300"
                         />
 
                     </div>
@@ -72,16 +78,16 @@ function ProjectForm({ onSubmit, onCancel }) {
                         <button
                             type="button"
                             onClick={onCancel}
-                            className="px-5 py-3 rounded-xl border"
+                            className="px-5 py-3 rounded-xl border hover:bg-gray-100 transition"
                         >
                             Cancel
                         </button>
 
                         <button
                             type="submit"
-                            className="px-5 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
+                            className="px-5 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
                         >
-                            Create Project
+                            {isEdit ? "Update Project" : "Create Project"}
                         </button>
 
                     </div>

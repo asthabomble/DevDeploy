@@ -3,39 +3,49 @@ import { toast } from "react-toastify";
 
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import ProjectForm from "../../components/project/ProjectForm";
+import DeleteProjectModal from "../../components/project/DeleteProjectModal";
 
 import {
     getProjects,
     createProject,
+    updateProject,
+    deleteProject
 } from "../../services/projectService";
 
 function Projects() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [deleteModal, setDeleteModal] = useState(false);
 
     useEffect(() => {
         fetchProjects();
     }, []);
 
     const fetchProjects = async () => {
-        try {
-            const response = await getProjects();
 
-            setProjects(response.projects || []);
+    setLoading(true);
 
-        } catch (error) {
+    try {
 
-            console.error(error);
+        const response = await getProjects();
 
-            toast.error("Failed to load projects");
+        setProjects(response.projects || []);
 
-        } finally {
+    } catch (error) {
 
-            setLoading(false);
+        console.error(error);
 
-        }
-    };
+        toast.error("Failed to load projects");
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+};
 
     const handleCreateProject = async (data) => {
 
@@ -60,9 +70,58 @@ function Projects() {
 
     };
 
+    const handleUpdateProject = async (data) => {
+
+        try {
+
+            await updateProject(selectedProject._id, data);
+
+            toast.success("Project Updated!");
+
+            setSelectedProject(null);
+
+            setShowModal(false);
+
+            fetchProjects();
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to update project"
+            );
+
+        }
+
+    };
+    const handleDeleteProject = async () => {
+
+    try {
+
+        await deleteProject(selectedProject._id);
+
+        toast.success("Project Deleted!");
+
+        setDeleteModal(false);
+        setSelectedProject(null);
+
+        fetchProjects();
+
+    } catch (error) {
+
+        toast.error(
+            error.response?.data?.message ||
+            "Failed to delete project"
+        );
+
+    }
+
+};
+
     return (
 
         <DashboardLayout>
+           
 
             <div className="flex justify-between items-center mb-8">
 
@@ -71,7 +130,10 @@ function Projects() {
                 </h1>
 
                 <button
-                    onClick={() => setShowModal(true)}
+                    onClick={() => {
+                        setSelectedProject(null);
+                        setShowModal(true);
+                    }}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl"
                 >
                     + New Project
@@ -122,13 +184,25 @@ function Projects() {
 
                             <div className="flex gap-3">
 
-                                <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
+                                <button
+                                    onClick={() => {
+                                        setSelectedProject(project);
+                                        setShowModal(true);
+                                    }}
+                                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg"
+                                >
                                     Edit
                                 </button>
 
-                                <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
-                                    Delete
-                                </button>
+                                <button
+    onClick={() => {
+        setSelectedProject(project);
+        setDeleteModal(true);
+    }}
+    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+>
+    Delete
+</button>
 
                             </div>
 
@@ -142,10 +216,28 @@ function Projects() {
 
             {showModal && (
                 <ProjectForm
-                    onSubmit={handleCreateProject}
-                    onCancel={() => setShowModal(false)}
+                    initialData={selectedProject}
+                    isEdit={selectedProject !== null}
+                    onSubmit={
+                        selectedProject
+                            ? handleUpdateProject
+                            : handleCreateProject
+                    }
+                    onCancel={() => {
+                        setSelectedProject(null);
+                        setShowModal(false);
+                    }}
                 />
             )}
+             {deleteModal && (
+    <DeleteProjectModal
+        onConfirm={handleDeleteProject}
+        onCancel={() => {
+            setDeleteModal(false);
+            setSelectedProject(null);
+        }}
+    />
+)}
 
         </DashboardLayout>
 
