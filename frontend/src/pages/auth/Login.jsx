@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import Logo from "../../components/common/Logo";
-import { loginUser } from "../../services/authService";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
+import { loginUser } from "../../services/authService";
+import { useAuth } from "../../context/AuthContext";
 
 function Login() {
-     const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const { login } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -29,32 +31,32 @@ function Login() {
     };
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    try {
-        setLoading(true);
+        try {
+            setLoading(true);
 
-        const response = await loginUser(formData);
+            const response = await loginUser(formData);
 
-        // Save JWT Token
-        localStorage.setItem("token", response.token);
+            // Save user & token using Auth Context
+            login(response.token, response.user);
 
-        toast.success("Login Successful!");
+            toast.success(response.message);
 
-        navigate("/dashboard");
+            navigate("/dashboard");
 
-    } catch (error) {
+        } catch (error) {
 
-        toast.error(
-            error.response?.data?.message || "Login Failed"
-        );
+            toast.error(
+                error.response?.data?.message || "Login Failed"
+            );
 
-    } finally {
+        } finally {
 
-        setLoading(false);
+            setLoading(false);
 
-    }
-};
+        }
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center px-4">
@@ -104,9 +106,7 @@ function Login() {
 
                             <button
                                 type="button"
-                                onClick={() =>
-                                    setShowPassword(!showPassword)
-                                }
+                                onClick={() => setShowPassword(!showPassword)}
                                 className="absolute inset-y-0 right-4 flex items-center text-slate-500 hover:text-slate-700"
                             >
                                 {showPassword ? (
@@ -119,12 +119,12 @@ function Login() {
                         </div>
                     </div>
 
-                   <Button
-    type="submit"
-    loading={loading}
->
-    Sign In
-</Button>
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
+                        Sign In
+                    </Button>
 
                 </form>
 
