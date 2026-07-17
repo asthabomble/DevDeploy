@@ -221,13 +221,6 @@ http://localhost:5173
 - CI/CD Pipeline
 - Cloud Deployment
 
----
-
-## 🖼 Screenshots
-
-> Screenshots and demo GIF will be added after the UI is completed.
-
----
 
 ## 🎯 Future Enhancements
 
