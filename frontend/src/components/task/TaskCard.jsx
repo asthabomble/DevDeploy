@@ -1,3 +1,4 @@
+import { FaTrash, FaEdit } from "react-icons/fa";
 function TaskCard({
     task,
     onEdit,
@@ -43,18 +44,22 @@ function TaskCard({
             <div className="flex gap-3 ml-6">
 
                 <button
-                    onClick={() => onEdit(task)}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition"
-                >
-                    Edit
-                </button>
+    type="button"
+    onClick={() => onEdit(task)}
+    className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition"
+>
+    <FaEdit size={14} />
+    Edit
+</button>
 
-                <button
-                    onClick={() => onDelete(task)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
-                >
-                    Delete
-                </button>
+<button
+    type="button"
+    onClick={() => onDelete(task)}
+    className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
+>
+    <FaTrash size={14} />
+    Delete
+</button>
 
             </div>
 

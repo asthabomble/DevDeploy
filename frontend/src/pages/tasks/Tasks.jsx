@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import TaskCard from "../../components/task/TaskCard";
 import TaskForm from "../../components/task/TaskForm";
+import DeleteTaskModal from "../../components/task/DeleteTaskModal";
 
 import {
     getTasks,
     createTask,
-    updateTask
+    updateTask,
+    deleteTask,
 } from "../../services/taskService";
 
 import { getProjects } from "../../services/projectService";
@@ -16,12 +18,15 @@ import { getProjects } from "../../services/projectService";
 function Tasks() {
 
     const [tasks, setTasks] = useState([]);
+    const [projects, setProjects] = useState([]);
+
     const [loading, setLoading] = useState(true);
 
-    const [projects, setProjects] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+
     const [selectedTask, setSelectedTask] = useState(null);
-const [isEdit, setIsEdit] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
         fetchTasks();
@@ -39,8 +44,6 @@ const [isEdit, setIsEdit] = useState(false);
             setTasks(response.tasks || []);
 
         } catch (error) {
-
-            console.error(error);
 
             toast.error("Failed to load tasks");
 
@@ -61,8 +64,6 @@ const [isEdit, setIsEdit] = useState(false);
             setProjects(response.projects || []);
 
         } catch (error) {
-
-            console.error(error);
 
             toast.error("Failed to load projects");
 
@@ -92,30 +93,55 @@ const [isEdit, setIsEdit] = useState(false);
         }
 
     };
+
     const handleUpdateTask = async (data) => {
 
-    try {
+        try {
 
-        await updateTask(selectedTask._id, data);
+            await updateTask(selectedTask._id, data);
 
-        toast.success("Task Updated!");
+            toast.success("Task Updated!");
 
-        setShowModal(false);
-        setSelectedTask(null);
-        setIsEdit(false);
+            setShowModal(false);
+            setSelectedTask(null);
+            setIsEdit(false);
 
-        fetchTasks();
+            fetchTasks();
 
-    } catch (error) {
+        } catch (error) {
 
-        toast.error(
-            error.response?.data?.message ||
-            "Failed to update task"
-        );
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to update task"
+            );
 
-    }
+        }
 
-};
+    };
+
+    const handleDeleteTask = async () => {
+
+        try {
+
+            await deleteTask(selectedTask._id);
+
+            toast.success("Task Deleted!");
+
+            setDeleteModal(false);
+            setSelectedTask(null);
+
+            fetchTasks();
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to delete task"
+            );
+
+        }
+
+    };
 
     return (
 
@@ -128,7 +154,11 @@ const [isEdit, setIsEdit] = useState(false);
                 </h1>
 
                 <button
-                    onClick={() => setShowModal(true)}
+                    onClick={() => {
+                        setSelectedTask(null);
+                        setIsEdit(false);
+                        setShowModal(true);
+                    }}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl"
                 >
                     + New Task
@@ -163,6 +193,15 @@ const [isEdit, setIsEdit] = useState(false);
                         <TaskCard
                             key={task._id}
                             task={task}
+                            onEdit={(task) => {
+                                setSelectedTask(task);
+                                setIsEdit(true);
+                                setShowModal(true);
+                            }}
+                            onDelete={(task) => {
+                                setSelectedTask(task);
+                                setDeleteModal(true);
+                            }}
                         />
 
                     ))}
@@ -171,13 +210,34 @@ const [isEdit, setIsEdit] = useState(false);
 
             )}
 
+            {deleteModal && (
+
+                <DeleteTaskModal
+                    onConfirm={handleDeleteTask}
+                    onCancel={() => {
+                        setDeleteModal(false);
+                        setSelectedTask(null);
+                    }}
+                />
+
+            )}
+
             {showModal && (
 
                 <TaskForm
+                    initialData={selectedTask}
                     projects={projects}
-                    isEdit={false}
-                    onSubmit={handleCreateTask}
-                    onCancel={() => setShowModal(false)}
+                    isEdit={isEdit}
+                    onSubmit={
+                        isEdit
+                            ? handleUpdateTask
+                            : handleCreateTask
+                    }
+                    onCancel={() => {
+                        setShowModal(false);
+                        setSelectedTask(null);
+                        setIsEdit(false);
+                    }}
                 />
 
             )}
