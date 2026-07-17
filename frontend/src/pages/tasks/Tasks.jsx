@@ -3,16 +3,26 @@ import { toast } from "react-toastify";
 
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import TaskCard from "../../components/task/TaskCard";
+import TaskForm from "../../components/task/TaskForm";
 
-import { getTasks } from "../../services/taskService";
+import {
+    getTasks,
+    createTask,
+} from "../../services/taskService";
+
+import { getProjects } from "../../services/projectService";
 
 function Tasks() {
 
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [projects, setProjects] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+
     useEffect(() => {
         fetchTasks();
+        fetchProjects();
     }, []);
 
     const fetchTasks = async () => {
@@ -39,6 +49,47 @@ function Tasks() {
 
     };
 
+    const fetchProjects = async () => {
+
+        try {
+
+            const response = await getProjects();
+
+            setProjects(response.projects || []);
+
+        } catch (error) {
+
+            console.error(error);
+
+            toast.error("Failed to load projects");
+
+        }
+
+    };
+
+    const handleCreateTask = async (data) => {
+
+        try {
+
+            await createTask(data);
+
+            toast.success("Task Created!");
+
+            setShowModal(false);
+
+            fetchTasks();
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to create task"
+            );
+
+        }
+
+    };
+
     return (
 
         <DashboardLayout>
@@ -50,6 +101,7 @@ function Tasks() {
                 </h1>
 
                 <button
+                    onClick={() => setShowModal(true)}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl"
                 >
                     + New Task
@@ -89,6 +141,17 @@ function Tasks() {
                     ))}
 
                 </div>
+
+            )}
+
+            {showModal && (
+
+                <TaskForm
+                    projects={projects}
+                    isEdit={false}
+                    onSubmit={handleCreateTask}
+                    onCancel={() => setShowModal(false)}
+                />
 
             )}
 
