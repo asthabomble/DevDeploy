@@ -4,6 +4,7 @@ const Project = require("../models/Project");
 
 const createTask = async (req, res) => {
     try {
+        console.log(req.body);
         const { title, description, projectId, assignedTo } = req.body;
 
         // Validate required fields
@@ -65,38 +66,31 @@ res.status(201).json({
     }
 };
 
-const getTasks = async (req, res) => {
+
+    const getTasks = async (req, res) => {
     try {
-        const { projectId } = req.params;
 
-        const project = await Project.findById(projectId);
-
-        if (!project) {
-            return res.status(404).json({
-                success: false,
-                message: "Project not found."
-            });
-        }
-
-        const tasks = await Task.find({ project: projectId })
-            .populate("assignedTo", "name email")
-            .populate("createdBy", "name email")
-            .sort({ createdAt: -1 });
+        const tasks = await Task.find({
+            createdBy: req.user.userId,
+        })
+            .populate("project", "title")
+            .populate("assignedTo", "name email");
 
         res.status(200).json({
             success: true,
             count: tasks.length,
-            tasks
+            tasks,
         });
 
     } catch (error) {
+
         res.status(500).json({
             success: false,
-            message: error.message
+            message: error.message,
         });
+
     }
 };
-
 const updateTask = async (req, res) => {
     try {
         const { taskId } = req.params;
