@@ -10,6 +10,7 @@ import {
     getTasks,
     createTask,
     updateTask,
+    updateTaskStatus,
     deleteTask,
 } from "../../services/taskService";
 
@@ -45,6 +46,8 @@ function Tasks() {
 
         } catch (error) {
 
+            console.error(error);
+
             toast.error("Failed to load tasks");
 
         } finally {
@@ -64,6 +67,8 @@ function Tasks() {
             setProjects(response.projects || []);
 
         } catch (error) {
+
+            console.error(error);
 
             toast.error("Failed to load projects");
 
@@ -143,6 +148,27 @@ function Tasks() {
 
     };
 
+    const handleStatusChange = async (task, status) => {
+
+        try {
+
+            await updateTaskStatus(task._id, status);
+
+            toast.success("Task status updated!");
+
+            fetchTasks();
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to update status"
+            );
+
+        }
+
+    };
+
     return (
 
         <DashboardLayout>
@@ -202,6 +228,7 @@ function Tasks() {
                                 setSelectedTask(task);
                                 setDeleteModal(true);
                             }}
+                            onStatusChange={handleStatusChange}
                         />
 
                     ))}

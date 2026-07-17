@@ -19,3 +19,14 @@ export const deleteTask = async (id) => {
     const response = await api.delete(`/tasks/${id}`);
     return response.data;
 };
+
+export const updateTaskStatus = async (taskId, status) => {
+
+    const response = await api.patch(
+        `/tasks/${taskId}/status`,
+        { status }
+    );
+
+    return response.data;
+
+};
