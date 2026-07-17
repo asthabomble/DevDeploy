@@ -8,6 +8,7 @@ import TaskForm from "../../components/task/TaskForm";
 import {
     getTasks,
     createTask,
+    updateTask
 } from "../../services/taskService";
 
 import { getProjects } from "../../services/projectService";
@@ -19,6 +20,8 @@ function Tasks() {
 
     const [projects, setProjects] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [selectedTask, setSelectedTask] = useState(null);
+const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
         fetchTasks();
@@ -89,6 +92,30 @@ function Tasks() {
         }
 
     };
+    const handleUpdateTask = async (data) => {
+
+    try {
+
+        await updateTask(selectedTask._id, data);
+
+        toast.success("Task Updated!");
+
+        setShowModal(false);
+        setSelectedTask(null);
+        setIsEdit(false);
+
+        fetchTasks();
+
+    } catch (error) {
+
+        toast.error(
+            error.response?.data?.message ||
+            "Failed to update task"
+        );
+
+    }
+
+};
 
     return (
 
