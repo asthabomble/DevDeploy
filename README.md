@@ -4,103 +4,91 @@
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=jsonwebtokens)
 
-# 📖 Description
+## 📖 About
 
-DevDeploy is a production-style full-stack project management and team collaboration application inspired by tools like **Jira** and **Trello**.
+**DevDeploy** is a full-stack **Project Management & Team Collaboration** platform inspired by **Jira** and **Trello**.
 
-It enables users to securely authenticate, manage projects, organize tasks, assign work, collaborate with team members, and monitor project progress through a real-time dashboard.
-
-The backend is built using **Node.js, Express.js, MongoDB Atlas, and JWT Authentication**, while the frontend is being developed using **React.js, Vite, Tailwind CSS, and Axios**.
+It enables users to securely authenticate, manage projects, organize tasks, update task statuses, collaborate with team members, and monitor project progress through an intuitive dashboard.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-## ✅ Backend
+### 🔐 Authentication
 
-- Secure User Authentication (Register & Login)
-- Password Hashing (bcrypt)
+- User Registration & Login
 - JWT Authentication
-- Protected APIs
-- User Profile Management
-- Project Management
-- Task Management
-- Team Collaboration
-- Dashboard Analytics API
-- Role-based Authorization
-- Task Assignment Validation
-- MongoDB Atlas Integration
-- RESTful API Architecture
-
----
-
-## ✅ Frontend
-
-- React + Vite Setup
-- Tailwind CSS
-- Authentication Context (Context API)
-- Login Page
+- Password Hashing (bcrypt)
 - Protected Routes
-- Axios API Integration
-- JWT Token Management
-- Dashboard Layout
-- Responsive Sidebar
+
+### 📊 Dashboard
+
+- Live Dashboard Statistics
+- Project Overview
+- Task Overview
+
+### 📁 Projects
+
+- Create Project
+- View Projects
+- Edit Project
+- Delete Project
+
+### ✅ Tasks
+
+- Create Task
+- View Tasks
+- Edit Task
+- Delete Task
+- Update Task Status
+- Project-wise Task Management
+
+### 🎨 Frontend
+
+- React + Vite
+- Responsive Dashboard
+- Sidebar Navigation
 - Navbar
-- Dashboard Statistics Cards
-- Live Dashboard Analytics
+- Toast Notifications
+- Context API Authentication
 
 ---
 
-## 🚧 Upcoming
+## 🛠 Tech Stack
 
-- Projects CRUD Interface
-- Tasks Management UI
-- Team Management UI
-- Profile Page
-- Search & Filters
-- Responsive Mobile UI
-- Docker Support
-- CI/CD Pipeline
-- Cloud Deployment
-
----
-
-# 🛠️ Tech Stack
-
-## Frontend
+### Frontend
 
 - React.js
 - Vite
 - Tailwind CSS
 - Axios
 - React Router DOM
-- React Context API
+- Context API
 - React Toastify
 - React Icons
 
-## Backend
+### Backend
 
 - Node.js
 - Express.js
 - MongoDB Atlas
 - Mongoose
+- JWT
 - bcryptjs
-- JSON Web Token (JWT)
-- dotenv
 
-## Tools
+### Tools
 
 - Git
 - GitHub
-- Postman
 - VS Code
+- Postman
 
 ---
 
-# 📁 Project Structure
+## 📂 Project Structure
 
 ```text
 DevDeploy/
@@ -114,19 +102,22 @@ DevDeploy/
 │   │   ├── routes/
 │   │   ├── app.js
 │   │   └── server.js
-│   │
-│   └── package.json
+│   ├── package.json
+│   └── .env.example
 │
 ├── frontend/
 │   ├── src/
+│   │   ├── assets/
 │   │   ├── components/
 │   │   ├── context/
 │   │   ├── pages/
 │   │   ├── routes/
 │   │   ├── services/
-│   │   └── App.jsx
-│   │
-│   └── package.json
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── README.md
 └── LICENSE
@@ -134,22 +125,9 @@ DevDeploy/
 
 ---
 
-# 🔐 Authentication & Authorization
+## 🚀 Getting Started
 
-- Passwords are securely hashed using **bcrypt**.
-- Authentication is implemented using **JWT**.
-- React Context manages the authenticated user.
-- Axios automatically attaches JWT tokens to protected API requests.
-- Protected Routes prevent unauthorized access.
-- Only project owners can manage team members.
-- Tasks can only be assigned to project members.
-- Environment variables securely store sensitive credentials.
-
----
-
-# 🚀 Getting Started
-
-## Clone the repository
+### Clone the Repository
 
 ```bash
 git clone git@github.com:asthabomble/DevDeploy.git
@@ -158,7 +136,7 @@ cd DevDeploy
 
 ---
 
-## Backend Setup
+### Backend Setup
 
 ```bash
 cd backend
@@ -179,9 +157,15 @@ Start the backend:
 npm run dev
 ```
 
+Backend runs at:
+
+```
+http://localhost:5000
+```
+
 ---
 
-## Frontend Setup
+### Frontend Setup
 
 ```bash
 cd frontend
@@ -189,7 +173,7 @@ npm install
 npm run dev
 ```
 
-The frontend runs on:
+Frontend runs at:
 
 ```
 http://localhost:5173
@@ -197,74 +181,88 @@ http://localhost:5173
 
 ---
 
-# 📌 Current Progress
+## 🔒 Security
 
-## Backend
-
-- ✅ Authentication Module
-- ✅ User Profile Module
-- ✅ Project Management
-- ✅ Task Management
-- ✅ Team Collaboration
-- ✅ Dashboard Analytics API
-- ✅ Authorization & Access Control
-
-## Frontend
-
-- ✅ React Setup
-- ✅ Tailwind CSS
-- ✅ Authentication
-- ✅ Context API
-- ✅ Protected Routes
-- ✅ Login Integration
-- ✅ Dashboard Layout
-- ✅ Sidebar
-- ✅ Navbar
-- ✅ Dashboard Statistics
-- ⏳ Projects Module
-- ⏳ Tasks Module
-- ⏳ Profile Module
+- JWT Authentication
+- Password Hashing using bcrypt
+- Protected API Routes
+- Protected Frontend Routes
+- Environment Variables for Sensitive Credentials
 
 ---
 
-# 🎯 Roadmap
+## 📌 Current Progress
 
-- ✅ Backend Development
-- ✅ Authentication
-- ✅ Dashboard Integration
-- 🚧 Projects Management UI
-- 🚧 Tasks Management UI
-- 🚧 Team Collaboration UI
-- 🚧 Profile Management
-- 🚧 Responsive Design
-- 🚧 Dockerization
-- 🚧 CI/CD
-- 🚧 Cloud Deployment
+### ✅ Completed
+
+- Authentication System
+- User Profile API
+- Dashboard Analytics
+- Project CRUD
+- Task CRUD
+- Task Status Updates
+- Responsive Dashboard
+- Protected Routes
+- RESTful Backend APIs
+
+### 🚧 In Progress
+
+- Team Collaboration
+- Task Assignment
+- Project Members
+- Search & Filters
+
+### 📅 Planned
+
+- User Profile Page
+- Kanban Board
+- Drag & Drop Tasks
+- Docker Support
+- CI/CD Pipeline
+- Cloud Deployment
 
 ---
 
-# 👩‍💻 Author
+## 🖼 Screenshots
+
+> Screenshots and demo GIF will be added after the UI is completed.
+
+---
+
+## 🎯 Future Enhancements
+
+- Real-time Notifications
+- Activity Logs
+- File Attachments
+- Comments on Tasks
+- Email Notifications
+- Dark Mode
+- Calendar View
+
+---
+
+## 👩‍💻 Author
 
 **Astha Bomble**
 
-GitHub: https://github.com/asthabomble
+- GitHub: https://github.com/asthabomble
 
 ---
 
-# 🤝 Contributing
+## 🤝 Contributing
 
 Contributions, suggestions, and feedback are welcome.
 
-Feel free to fork the repository, open an issue, or submit a pull request.
+Feel free to fork this repository, open an issue, or submit a pull request.
 
 ---
 
-# ⭐ Support
+## ⭐ Support
 
-If you found this project useful, please consider giving it a ⭐ on GitHub.
+If you found this project useful, consider giving it a ⭐ on GitHub.
 
 ---
 
-# 📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
