@@ -6,6 +6,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import Projects from "../pages/projects/Projects";
 import Tasks from "../pages/tasks/Tasks";
 import Profile from "../pages/profile/Profile";
+import Team from "../pages/team/Team";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -60,6 +61,14 @@ function AppRoutes() {
                     element={
                         <ProtectedRoute>
                             <Profile />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/team"
+                    element={
+                        <ProtectedRoute>
+                            <Team />
                         </ProtectedRoute>
                     }
                 />

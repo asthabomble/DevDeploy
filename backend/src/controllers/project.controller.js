@@ -39,7 +39,7 @@ const createProject = async (req, res) => {
 const getProjects = async (req, res) => {
     try {
         const projects = await Project.find({
-            owner: req.user.userId
+            members: req.user.userId
         });
 
         res.status(200).json({
@@ -134,6 +134,17 @@ const getProjectMembers = async (req, res) => {
             });
         }
 
+        const isMember = project.members.some(
+    member => member._id.toString() === req.user.userId
+);
+
+if (!isMember) {
+    return res.status(403).json({
+        success: false,
+        message: "Access denied."
+    });
+}
+
         res.status(200).json({
             success: true,
             count: project.members.length,
@@ -176,10 +187,21 @@ const removeMember = async (req, res) => {
                 message: "Project owner cannot be removed."
             });
         }
+        const isMember = project.members.some(
+    member => member.toString() === userId
+);
+
+if (!isMember) {
+    return res.status(404).json({
+        success: false,
+        message: "User is not a project member."
+    });
+}
 
         project.members = project.members.filter(
             member => member.toString() !== userId
         );
+
 
         await project.save();
 
@@ -308,6 +330,16 @@ const getProjectById = async (req, res) => {
                 message: "Project not found."
             });
         }
+        const isMember = project.members.some(
+    member => member._id.toString() === req.user.userId
+);
+
+if (!isMember) {
+    return res.status(403).json({
+        success: false,
+        message: "Access denied."
+    });
+}
 
         const totalTasks = await Task.countDocuments({
             project: projectId
@@ -345,6 +377,7 @@ const getProjectById = async (req, res) => {
             message: error.message
         });
     }
+    
 };
 
 module.exports = {

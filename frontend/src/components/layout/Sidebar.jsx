@@ -2,6 +2,7 @@ import {
     FaHome,
     FaFolderOpen,
     FaTasks,
+    FaUsers,
     FaUser,
     FaSignOutAlt,
 } from "react-icons/fa";
@@ -10,6 +11,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 function Sidebar() {
+
     const navigate = useNavigate();
     const { logout, user } = useAuth();
 
@@ -66,6 +68,14 @@ function Sidebar() {
                     >
                         <FaTasks />
                         Tasks
+                    </NavLink>
+
+                    <NavLink
+                        to="/team"
+                        className={navLinkClass}
+                    >
+                        <FaUsers />
+                        Team
                     </NavLink>
 
                     <NavLink

@@ -1,5 +1,6 @@
 import AppRoutes from "./routes/AppRoutes";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     return (
@@ -9,6 +10,10 @@ function App() {
             <ToastContainer
                 position="top-right"
                 autoClose={2500}
+                newestOnTop
+                closeOnClick
+                pauseOnHover
+                theme="colored"
             />
         </>
     );
