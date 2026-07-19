@@ -7,37 +7,44 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=jsonwebtokens)
 
-## 📖 About
+# 📖 About
 
 **DevDeploy** is a full-stack **Project Management & Team Collaboration** platform inspired by **Jira** and **Trello**.
 
-It enables users to securely authenticate, manage projects, organize tasks, update task statuses, collaborate with team members, and monitor project progress through an intuitive dashboard.
+It enables users to securely authenticate, manage projects, organize tasks, collaborate with team members, assign work, and monitor project progress through a responsive dashboard.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-### 🔐 Authentication
+## 🔐 Authentication
 
 - User Registration & Login
 - JWT Authentication
 - Password Hashing (bcrypt)
-- Protected Routes
+- Protected Backend APIs
+- Protected Frontend Routes
 
-### 📊 Dashboard
+---
+
+## 📊 Dashboard
 
 - Live Dashboard Statistics
 - Project Overview
 - Task Overview
 
-### 📁 Projects
+---
+
+## 📁 Projects
 
 - Create Project
 - View Projects
 - Edit Project
 - Delete Project
 
-### ✅ Tasks
+---
+
+## ✅ Tasks
 
 - Create Task
 - View Tasks
@@ -45,21 +52,37 @@ It enables users to securely authenticate, manage projects, organize tasks, upda
 - Delete Task
 - Update Task Status
 - Project-wise Task Management
+- Task Assignment Validation
 
-### 🎨 Frontend
+---
+
+## 👥 Team Collaboration
+
+- Add Members by Email
+- View Project Members
+- Remove Members
+- Owner-based Access Control
+
+---
+
+## 🎨 Frontend
 
 - React + Vite
 - Responsive Dashboard
 - Sidebar Navigation
 - Navbar
+- Dashboard Cards
+- Projects Page
+- Tasks Page
+- Team Page
 - Toast Notifications
 - Context API Authentication
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
-### Frontend
+## Frontend
 
 - React.js
 - Vite
@@ -70,7 +93,7 @@ It enables users to securely authenticate, manage projects, organize tasks, upda
 - React Toastify
 - React Icons
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
@@ -79,7 +102,7 @@ It enables users to securely authenticate, manage projects, organize tasks, upda
 - JWT
 - bcryptjs
 
-### Tools
+## Tools
 
 - Git
 - GitHub
@@ -88,7 +111,7 @@ It enables users to securely authenticate, manage projects, organize tasks, upda
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 DevDeploy/
@@ -111,6 +134,11 @@ DevDeploy/
 │   │   ├── components/
 │   │   ├── context/
 │   │   ├── pages/
+│   │   │   ├── auth/
+│   │   │   ├── dashboard/
+│   │   │   ├── projects/
+│   │   │   ├── tasks/
+│   │   │   └── team/
 │   │   ├── routes/
 │   │   ├── services/
 │   │   ├── utils/
@@ -125,9 +153,9 @@ DevDeploy/
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-### Clone the Repository
+## Clone the Repository
 
 ```bash
 git clone git@github.com:asthabomble/DevDeploy.git
@@ -136,7 +164,7 @@ cd DevDeploy
 
 ---
 
-### Backend Setup
+## Backend Setup
 
 ```bash
 cd backend
@@ -165,7 +193,7 @@ http://localhost:5000
 
 ---
 
-### Frontend Setup
+## Frontend Setup
 
 ```bash
 cd frontend
@@ -181,48 +209,53 @@ http://localhost:5173
 
 ---
 
-## 🔒 Security
+# 🔒 Security
 
 - JWT Authentication
 - Password Hashing using bcrypt
-- Protected API Routes
+- Protected Backend APIs
 - Protected Frontend Routes
 - Environment Variables for Sensitive Credentials
 
 ---
 
-## 📌 Current Progress
+# 📌 Current Progress
 
-### ✅ Completed
+## ✅ Completed
 
 - Authentication System
-- User Profile API
 - Dashboard Analytics
 - Project CRUD
 - Task CRUD
 - Task Status Updates
+- Team Collaboration
+- Member Management
+- Task Assignment Validation
 - Responsive Dashboard
 - Protected Routes
 - RESTful Backend APIs
 
-### 🚧 In Progress
+---
 
-- Team Collaboration
-- Task Assignment
-- Project Members
-- Search & Filters
-
-### 📅 Planned
+## 🚧 In Progress
 
 - User Profile Page
+- Search & Filters
+- UI Improvements
+
+---
+
+## 📅 Planned
+
 - Kanban Board
 - Drag & Drop Tasks
 - Docker Support
 - CI/CD Pipeline
 - Cloud Deployment
 
+---
 
-## 🎯 Future Enhancements
+# 🎯 Future Enhancements
 
 - Real-time Notifications
 - Activity Logs
@@ -234,15 +267,15 @@ http://localhost:5173
 
 ---
 
-## 👩‍💻 Author
+# 👩‍💻 Author
 
 **Astha Bomble**
 
-- GitHub: https://github.com/asthabomble
+GitHub: https://github.com/asthabomble
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 Contributions, suggestions, and feedback are welcome.
 
@@ -250,12 +283,12 @@ Feel free to fork this repository, open an issue, or submit a pull request.
 
 ---
 
-## ⭐ Support
+# ⭐ Support
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is licensed under the MIT License.
