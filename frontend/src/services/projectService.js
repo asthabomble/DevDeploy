@@ -19,3 +19,11 @@ export const deleteProject = async (id) => {
     const response = await api.delete(`/projects/${id}`);
     return response.data;
 };
+
+export const getProjectById = async (projectId) => {
+
+    const response = await api.get(`/projects/${projectId}`);
+
+    return response.data;
+
+};

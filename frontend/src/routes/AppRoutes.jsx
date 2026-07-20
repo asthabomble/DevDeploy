@@ -7,7 +7,7 @@ import Projects from "../pages/projects/Projects";
 import Tasks from "../pages/tasks/Tasks";
 import Profile from "../pages/profile/Profile";
 import Team from "../pages/team/Team";
-
+import ProjectDetails from "../pages/projects/ProjectDetails";
 import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoutes() {
@@ -72,6 +72,15 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route
+    path="/projects/:projectId"
+    element={
+        <ProtectedRoute>
+            <ProjectDetails />
+        </ProtectedRoute>
+    }
+/>
 
             </Routes>
         </BrowserRouter>

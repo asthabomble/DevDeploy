@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import ProjectForm from "../../components/project/ProjectForm";
 import DeleteProjectModal from "../../components/project/DeleteProjectModal";
+import ProjectCard from "../../components/project/ProjectCard";
 
 import {
     getProjects,
@@ -163,54 +164,24 @@ function Projects() {
 
                 <div className="space-y-4">
 
-                    {projects.map((project) => (
+    {projects.map((project) => (
 
-                        <div
-                            key={project._id}
-                            className="bg-white rounded-xl shadow p-6 flex justify-between items-center"
-                        >
+        <ProjectCard
+            key={project._id}
+            project={project}
+            onEdit={(project) => {
+                setSelectedProject(project);
+                setShowModal(true);
+            }}
+            onDelete={(project) => {
+                setSelectedProject(project);
+                setDeleteModal(true);
+            }}
+        />
 
-                            <div>
+    ))}
 
-                                <h2 className="text-xl font-semibold">
-                                    {project.title}
-                                </h2>
-
-                                <p className="text-slate-500 mt-1">
-                                    {project.description}
-                                </p>
-
-                            </div>
-
-                            <div className="flex gap-3">
-
-                                <button
-                                    onClick={() => {
-                                        setSelectedProject(project);
-                                        setShowModal(true);
-                                    }}
-                                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg"
-                                >
-                                    Edit
-                                </button>
-
-                                <button
-    onClick={() => {
-        setSelectedProject(project);
-        setDeleteModal(true);
-    }}
-    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
->
-    Delete
-</button>
-
-                            </div>
-
-                        </div>
-
-                    ))}
-
-                </div>
+</div>
 
             )}
 
