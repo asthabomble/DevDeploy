@@ -39,8 +39,11 @@ It enables users to securely authenticate, manage projects, organize tasks, coll
 
 - Create Project
 - View Projects
+- View Project Details
 - Edit Project
 - Delete Project
+- Project Statistics
+- View Project Members
 
 ---
 
@@ -72,6 +75,7 @@ It enables users to securely authenticate, manage projects, organize tasks, coll
 - Sidebar Navigation
 - Navbar
 - Dashboard Cards
+- Project Details Page
 - Projects Page
 - Tasks Page
 - Team Page
@@ -132,10 +136,15 @@ DevDeploy/
 │   ├── src/
 │   │   ├── assets/
 │   │   ├── components/
+│   │   │   ├── layout/
+│   │   │   ├── project/
+│   │   │   ├── task/
+│   │   │   └── team/
 │   │   ├── context/
 │   │   ├── pages/
 │   │   │   ├── auth/
 │   │   │   ├── dashboard/
+│   │   │   ├── profile/
 │   │   │   ├── projects/
 │   │   │   ├── tasks/
 │   │   │   └── team/
@@ -226,6 +235,7 @@ http://localhost:5173
 - Authentication System
 - Dashboard Analytics
 - Project CRUD
+- Project Details Page
 - Task CRUD
 - Task Status Updates
 - Team Collaboration
