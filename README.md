@@ -126,8 +126,6 @@ The backend provides secure REST APIs for:
 - Team Member Management
 - Project Details & Statistics
 
-> **Note:** All protected endpoints require a valid JWT access token.
-
 ---
 
 # 📂 Project Structure
