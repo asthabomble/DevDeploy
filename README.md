@@ -115,6 +115,21 @@ It enables users to securely authenticate, manage projects, organize tasks, coll
 
 ---
 
+# 🔗 API Highlights
+
+The backend provides secure REST APIs for:
+
+- Authentication (Register & Login)
+- Dashboard Analytics
+- Project Management
+- Task Management
+- Team Member Management
+- Project Details & Statistics
+
+> **Note:** All protected endpoints require a valid JWT access token.
+
+---
+
 # 📂 Project Structure
 
 ```text
@@ -136,15 +151,10 @@ DevDeploy/
 │   ├── src/
 │   │   ├── assets/
 │   │   ├── components/
-│   │   │   ├── layout/
-│   │   │   ├── project/
-│   │   │   ├── task/
-│   │   │   └── team/
 │   │   ├── context/
 │   │   ├── pages/
 │   │   │   ├── auth/
 │   │   │   ├── dashboard/
-│   │   │   ├── profile/
 │   │   │   ├── projects/
 │   │   │   ├── tasks/
 │   │   │   └── team/
